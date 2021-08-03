@@ -29,12 +29,11 @@ public class FileParser {
     public static void main(String[] args) throws IOException {
 
         String fileName = args[0];
-
         String actualData = readFile(fileName);
 
         if (actualData!=null){
 
-            String columns = actualData.split("\n")[0];
+            String columns = actualData.split("\n")[0].replaceAll("\\s+", ",");
             String[] column = columns.split(",");
 
             String htmltoString = generateHTMLFromList(column,parseTheList(actualData));
@@ -44,9 +43,7 @@ public class FileParser {
 
             System.out.println("HTML Result Generated");
         }else{
-
-            System.out.println("show not present");
-
+            System.out.println("No Result Present");
         }
 
 
@@ -57,7 +54,6 @@ public class FileParser {
         String columns = actualData.split("\n")[0];
 
         String[] columnsData = actualData.split("\n");
-        columns = columns.replaceAll("\\s+", ",");
 
 
         ArrayList<ArrayList<String>> arrayList = new ArrayList<>();
@@ -105,7 +101,7 @@ public class FileParser {
         Html rootTag = new Html(null).give(html -> {
             new Head(html).give(head -> {
                 new StyleTag(head).give(style -> {
-                    new NoTag(style, "#customers {\n  font-family: Arial, Helvetica, sans-serif;\n  border-collapse: collapse;\n  width: 100%;\n}\n\n#customers td, #customers th {\n  border: 1px solid #ddd;\n  padding: 8px;\n}\n\n#customers tr:nth-child(even){background-color: #f2f2f2;}\n\n#customers tr:hover {background-color: #ddd;}\n\n#customers th {\n  padding-top: 12px;\n  padding-bottom: 12px;\n  text-align: left;\n  background-color: #04AA6D;\n  color: white;\n}");
+                    new NoTag(style, "#customers {\n  font-family: Arial, Helvetica, sans-serif;\n  border-collapse: collapse;\n  width: 100%;\n}\n\n#customers td, #customers th {\n  border: 1px solid #ddd;\n  padding: 8px;\n}\n\n#customers tr:nth-child(even){background-color: #f2f2f2;}\n\n#customers tr:hover {background-color: #ddd;}\n\n#customers th {\n  padding-top: 12px;\n  padding-bottom: 12px;\n  text-align: left;\n  background-color: #357cbf;\n  color: white;\n}");
                 });
             });
         });
@@ -113,7 +109,7 @@ public class FileParser {
         Body body = new Body(rootTag);
 
         P p = new P(body);
-        new NoTag(p, "Hi,");
+        new NoTag(p, "Hi Everyone,");
         new Br(p);
 
         P p2 = new P(body);

@@ -1,3 +1,4 @@
 # kube-pod-parser
 
-This repository is use to parse Kubectl get pods command output and generate HTML page.
+This repository is used to parse Kubectl get pods command output and generate HTML page.
+
